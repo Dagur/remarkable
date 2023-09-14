@@ -33,4 +33,20 @@ describe('Test empty lines plugin', function() {
       assert.strictEqual(rendered, expected);
     });
   });
+
+  it('should render with empty lines with commonmark', function() {
+    [
+      ['', ''],
+      ['abc\n\ndef\n', '<p>abc</p>\n<p>def</p>\n'],
+      ['abc\n\n\ndef\n', '<p>abc</p>\n<p>def</p>\n'],
+      ['abc\n\n\n\ndef\n\n\n\nghi\n', '<p>abc</p>\n<p></p>\n<p>def</p>\n<p></p>\n<p>ghi</p>\n'],
+      ['line1\n\n\n\nline3\n', '<p>line1</p>\n<p></p>\n<p>line3</p>\n'],
+      ['* line1\n* line2\n\n\nline4\n', '<ul>\n<li>line1</li>\n<li>line2</li>\n</ul>\n<p>line4</p>\n']
+    ].forEach(function(data) {
+      var [text, expected] = data;
+      var md = new Remarkable('commonmark', { emptyLines: true });
+      var rendered = md.render(text);
+      assert.strictEqual(rendered, expected);
+    });
+  });
 });

@@ -7155,7 +7155,8 @@ var commonmarkConfig = {
     //
     highlight: null,
 
-    maxNesting:   20            // Internal protection, recursion limit
+    maxNesting:   20,            // Internal protection, recursion limit
+    emptyLines:   false          // Preserve empty lines with empty <p> tag
   },
 
   components: {
@@ -7165,7 +7166,8 @@ var commonmarkConfig = {
         'block',
         'inline',
         'references',
-        'abbr2'
+        'abbr2',
+        'empty_lines'
       ]
     },
 
